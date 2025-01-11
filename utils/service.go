@@ -29,6 +29,7 @@ func (r *Service) Run() {
 
 	if err := r.Pres.Present(data); err != nil {
 		fmt.Printf("Error occured in presenter: %v\n", err)
+		return
 	}
 }
 
