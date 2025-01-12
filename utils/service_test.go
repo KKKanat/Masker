@@ -11,7 +11,7 @@ func TestServiceRun(t *testing.T) {
 	mockPresenter := &MockPresenter{}
 
 	input := "Here's my spammy page: http://hehefouls.netHAHAHA see you."
-	expectedOutput := "Here's my spammy page: http://******************* see you."
+	expectedOutput := []string{"Here's my spammy page: http://******************* see you."}
 
 	mockProducer.On("Produce").Return(input, nil)
 	mockPresenter.On("Present", expectedOutput).Return(nil)

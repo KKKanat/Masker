@@ -1,5 +1,9 @@
 package utils
 
+import (
+	"sync"
+)
+
 func RuneLength(args string) int {
 	count := 0
 	for range args {
@@ -8,11 +12,12 @@ func RuneLength(args string) int {
 	return count
 }
 
-func Find(text string) string {
+func Find(text string, ch chan<- string, wg *sync.WaitGroup) {
 	pattern := "http://"
 	patternLength := RuneLength(pattern)
 	needToMask := false
 	textInRunes := []rune(text)
+	defer wg.Done()
 	for i, r := range textInRunes {
 		if r == ' ' {
 			needToMask = false
@@ -26,5 +31,5 @@ func Find(text string) string {
 			}
 		}
 	}
-	return string(textInRunes)
+	ch <- string(textInRunes)
 }
